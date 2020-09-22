@@ -24,7 +24,9 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        return view('dashboard.user.index');
+        $users =  User::all();
+        dd($users);
+         return view('dashboard.user.index')->with('users',$users);
     }
 
     /**

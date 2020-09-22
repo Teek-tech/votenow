@@ -24,9 +24,12 @@ Auth::routes();
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::get('/profile', 'UserProfileController@index')->name('dashboard.profile');
-    Route::patch('profile/{user}/update', 'UserProfileController@update')->name('dashboard.profile-update');
-      //Subscription
-    Route::get('/subscription', 'SubscriptionController@user_sub')->name('dashboard.subscription');
+    //Route::patch('profile/{user}/update', 'UserProfileController@update')->name('dashboard.profile-update');
+
+      //Campaigns
+    Route::get('/campaign', 'CampaignController@index')->name('campaign');
+    Route::get('/campaign/create', 'CampaignController@create')->name('campaign.create');
+    Route::post('/campaign', 'CampaignController@store')->name('campaign.store');
     // Route::get('/subscription/{id}', 'SubscriptionController@show_sub')->name('dashboard.subscription.show');
     //Transaction
     Route::get('/transaction', 'TransactionController@index')->name('dashboard.transaction');

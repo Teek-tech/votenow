@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
+use App\Models\Campaign;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class CampaignController extends Controller
 {
@@ -14,7 +16,8 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        //
+        $campaigns = Campaign::all();
+        return view('dashboard.campaign.index')->with('campaigns', $campaigns);
     }
 
     /**
@@ -24,7 +27,7 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.campaign.create');
     }
 
     /**
@@ -35,13 +38,33 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'=>'required',
+            'description'=>'required',
+            'banner' => 'required|image|mimes:jpg,jpeg,png|max:500',
+        ]);
+       
+        $campaign = new Campaign;
+        $campaign->user_id = auth()->user()->id;
+        $campaign->title = request('title');
+        $campaign->description = request('description');
+
+        if ($request->hasFile('banner')) {
+            $ban_img = $request->file('banner');
+            $filename = '_banner'.time().'.'.$ban_img->getClientOriginalExtension();
+            Image::make($ban_img)->resize(300, 300)->save(public_path('/banner_image/'.$filename));
+            $campaign->banner = $filename;
+        }
+
+        $campaign->save();
+        return ('campaign created');
+         //dd('testing');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function show(Campaign $campaign)
@@ -52,7 +75,7 @@ class CampaignController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function edit(Campaign $campaign)
@@ -64,7 +87,7 @@ class CampaignController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Campaign $campaign)
@@ -75,7 +98,7 @@ class CampaignController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Campaign  $campaign
+     * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
     public function destroy(Campaign $campaign)
