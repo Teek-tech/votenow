@@ -8,25 +8,14 @@ use  App\Models\User;
 class UserProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        $users =  User::all();
-        dd($users);
-         return view('dashboard.user.index')->with('users',$users);
+        $user =  auth()->user();
+        return view('dashboard.profile.index', compact('user'));
     }
 
     /**
@@ -71,9 +60,9 @@ class UserProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+      
     }
 
     /**
@@ -83,9 +72,20 @@ class UserProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        
+        $user->update([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'phone1' => $request->input('phone1'),
+            'phone2' => $request->input('phone2'),
+            'country' => $request->input('country'),
+            'city' => $request->input('city'),
+            'terms' => 1
+        ]);
+       return redirect()->route('profile.index')->with('success', 'Profile Updated!');
     }
 
     /**

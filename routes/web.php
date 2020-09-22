@@ -23,7 +23,9 @@ Auth::routes();
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
-    Route::get('/profile', 'UserProfileController@index')->name('dashboard.profile');
+    Route::get('/profile', 'UserProfileController@index')->name('profile.index');
+   //update profile
+    Route::patch('/profile/{user}/update', 'UserProfileController@update')->name('profile.update');
     //Route::patch('profile/{user}/update', 'UserProfileController@update')->name('dashboard.profile-update');
 
       //Campaigns

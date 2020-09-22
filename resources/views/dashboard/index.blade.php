@@ -18,7 +18,7 @@
 
                     <div>
                         
-                        <h4><a href="{{route('dashboard.profile')}}">View Profile</a></h4>
+                        <h4><a href="{{route('profile.index')}}">View Profile</a></h4>
                         <h4><a href="{{route('campaign')}}">View Campaigns</a></h4>
                         
                     </div>
