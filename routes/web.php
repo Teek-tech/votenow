@@ -19,4 +19,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/profile', 'UserProfileController@index')->name('dashboard.profile');
+    Route::patch('profile/{user}/update', 'UserProfileController@update')->name('dashboard.profile-update');
+      //Subscription
+    Route::get('/subscription', 'SubscriptionController@user_sub')->name('dashboard.subscription');
+    // Route::get('/subscription/{id}', 'SubscriptionController@show_sub')->name('dashboard.subscription.show');
+    //Transaction
+    Route::get('/transaction', 'TransactionController@index')->name('dashboard.transaction');
+    Route::delete('/transaction/{id}', 'TransactionController@destroy')->name('dashboard.transaction.delete');
+});

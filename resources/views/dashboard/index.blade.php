@@ -15,6 +15,13 @@
                     @endif
 
                     You are logged in!
+
+                    <div>
+                        
+                        <h4><a href="{{route('dashboard.profile')}}">View Profile</a></h4>
+                        <h4><a href="">Add New Campaign</a></h4>
+                        
+                    </div>
                 </div>
             </div>
         </div>
