@@ -13,6 +13,7 @@
                 <div class="card-body">
                         @forelse($campaigns as $campaign)
                             <h5>{{$campaign->title}}</h5>
+                            <a href="{{route('campaign.show',$campaign->id)}}">View campaign</a>
                         @empty
                             
                         @endforelse

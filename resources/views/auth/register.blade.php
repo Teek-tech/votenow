@@ -54,12 +54,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                            <label for="phone1" class="col-md-4 col-form-label text-md-right">{{ __('Phone 1') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required  autofocus>
+                                <input id="phone1" type="text" class="form-control @error('phone1') is-invalid @enderror" name="phone1" value="{{ old('phone1') }}" required  autofocus>
 
-                                @error('phone')
+                                @error('phone1')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -68,12 +68,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone_(whatsapp)" class="col-md-4 col-form-label text-md-right">{{ __('Phone_(whatspp)') }}</label>
+                            <label for="phone2" class="col-md-4 col-form-label text-md-right">{{ __('Phone 2') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone_(whatsapp)" type="text" class="form-control @error('phone_(whatsapp)') is-invalid @enderror" name="phone_(whatsapp)" value="{{ old('phone_(whatsapp)') }}" required autofocus>
+                                <input id="phone2" type="text" class="form-control @error('phone2') is-invalid @enderror" name="phone2" value="{{ old('phone2') }}" required autofocus>
 
-                                @error('phone_(whatsapp)')
+                                @error('phone2')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

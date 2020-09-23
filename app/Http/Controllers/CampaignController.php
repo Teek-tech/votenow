@@ -67,9 +67,12 @@ class CampaignController extends Controller
      * @param  \App\Models\Campaign  $campaign
      * @return \Illuminate\Http\Response
      */
-    public function show(Campaign $campaign)
+    public function show($id)
     {
-        //
+        
+        $campaign = Campaign::findorfail($id);
+        //dd($campaign);
+        return view('dashboard.campaign.show')->with('campaign', $campaign);
     }
 
     /**

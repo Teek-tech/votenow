@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Contest;
+use App\Models\Contest;
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 
 class ContestController extends Controller
@@ -14,7 +15,7 @@ class ContestController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +25,7 @@ class ContestController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.contest.create');
     }
 
     /**
@@ -35,13 +36,13 @@ class ContestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function show(Contest $contest)
@@ -52,7 +53,7 @@ class ContestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function edit(Contest $contest)
@@ -64,7 +65,7 @@ class ContestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Contest $contest)
@@ -75,7 +76,7 @@ class ContestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contest $contest)
