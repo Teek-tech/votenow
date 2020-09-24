@@ -23,9 +23,9 @@ class ContestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('dashboard.contest.create');
+    public function create(Campaign $campaign)
+    {   //dd($campaign);
+        return view('dashboard.contest.create',compact('campaign'));
     }
 
     /**
@@ -34,8 +34,18 @@ class ContestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($campaign)
     {
+      
+        $contest = new Contest;
+        $contest->campaign_id = $campaign;
+        $contest->stage = request('stage');
+        $contest->title = request('title');
+        $contest->description = request('description');
+        $contest->regulations = request('regulations');;
+        $contest->save();
+
+        return 'Contest added';
 
     }
 

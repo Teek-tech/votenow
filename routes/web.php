@@ -36,10 +36,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/campaign/{id}', 'CampaignController@show')->name('campaign.show');
 
     //Contests
-    Route::get('contest', 'ContestController@create')->name('contest.create');
-    Route::post('contest', 'ContestController@store')->name('contest.store');
+    Route::get('/campaign/{campaign}/contest/create', 'ContestController@create')->name('contest.create');
+    Route::post('/campaign/{campaign}/contest', 'ContestController@store')->name('contest.store');
     // Route::get('/subscription/{id}', 'SubscriptionController@show_sub')->name('dashboard.subscription.show');
     //Transaction
     Route::get('/transaction', 'TransactionController@index')->name('dashboard.transaction');
     Route::delete('/transaction/{id}', 'TransactionController@destroy')->name('dashboard.transaction.delete');
 });
+
+    //Feedback
+    route::get('/feedback/create', 'FeedbackController@create')->name('feedback.create');
+    route::post('/feedback', 'FeedbackController@store')->name('feedback.store');

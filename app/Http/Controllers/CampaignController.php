@@ -38,10 +38,11 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request, [
             'title'=>'required',
             'description'=>'required',
-            'banner' => 'required|image|mimes:jpg,jpeg,png|max:500',
+            'banner' => 'required|image|mimes:jpg,jpeg,png',
         ]);
        
         $campaign = new Campaign;

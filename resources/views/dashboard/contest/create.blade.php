@@ -11,7 +11,8 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('contest.store') }}">
+                    <form method="POST" action="/dashboard/campaign/{{$campaign->id}}/contest">
+                      
                         @csrf
 
                         <div class="form-group row">
@@ -57,12 +58,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="rules_&_regulatioins" class="col-md-4 col-form-label text-md-right">{{ __('Rules and Regulations') }}</label>
+                            <label for="regulations" class="col-md-4 col-form-label text-md-right">{{ __('Rules and Regulations') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rules_&_regulatioins" type="text" class="form-control @error('rules_&_regulatioins') is-invalid @enderror" name="rules_&_regulatioins" value="{{ old('rules_&_regulatioins') }}" required  autofocus>
+                                <input id="regulations" type="text" class="form-control @error('regulations') is-invalid @enderror" name="regulations" value="{{ old('regulations') }}" required  autofocus>
 
-                                @error('rules_&_regulatioins')
+                                @error('regulations')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

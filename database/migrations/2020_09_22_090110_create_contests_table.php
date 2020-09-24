@@ -19,7 +19,7 @@ class CreateContestsTable extends Migration
             $table->string('stage');
             $table->string('title');
             $table->string('description');
-            $table->text('rules_&_regulations');
+            $table->text('regulations');
             $table->string('facebook')->default(0.00);
             $table->string('instagram')->default(0.00);
             $table->string('twitter')->default(0.00);
