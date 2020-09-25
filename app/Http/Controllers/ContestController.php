@@ -15,7 +15,8 @@ class ContestController extends Controller
      */
     public function index()
     {
-        
+        $contests = Contest::all();
+        return view('dashboard.contest.index')->with('contests', $contests);
     }
 
     /**

@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.subscription.create');
     }
 
     /**
@@ -35,7 +35,23 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request,[
+          'timeline'=>'required',
+          'amount'=>'required',
+          'payment_ref'=>'required',
+          'paystack_ref'=>'required'
+      ]);
+
+      $subscribe = new Subscription;
+      $subscribe->user_id = auth()->user()->id;
+      $subscribe->timeline = request('timeline');
+      $subscribe->amount = request('amount');
+      $subscribe->payment_ref = request('payment_ref');
+      $subscribe->paystack_ref=  request('paystack_ref');
+
+      $subscribe->save();
+      return 'subscription added';
+
     }
 
     /**

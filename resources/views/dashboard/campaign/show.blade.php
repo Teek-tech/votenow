@@ -16,7 +16,8 @@
                     </div>
                     <h4>{{$campaign->description}}</h4>
                   {{-- <h5><a href="{{route('campaign',$campaign->id,'contest.create')}}">Add Contest</a></h5> --}}
-                  <h5><a href="/dashboard/campaign/{{$campaign->id}}/contest/create">Add Contest</a></h5>
+                    <h5><a href="/dashboard/campaign/{{$campaign->id}}/contest/create">Add Contest</a></h5>
+                    <h5><a href="{{route('contest.view')}}">View Contests</a></h5>
                     </div>
                 </div>
             </div>

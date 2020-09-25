@@ -15,7 +15,7 @@
                             <h5>{{$campaign->title}}</h5>
                             <a href="{{route('campaign.show',$campaign->id)}}">View campaign</a>
                         @empty
-                            
+                            <h3>No Campaigns created</h3>
                         @endforelse
                   
                     </div>

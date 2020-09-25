@@ -15,7 +15,7 @@ class CreateContestantsTable extends Migration
     {
         Schema::create('contestants', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('campaign_id');
+            $table->bigInteger('contest_id');
             $table->bigInteger('contestant_id');
             $table->string('first_name');
             $table->string('last_name');
@@ -27,6 +27,7 @@ class CreateContestantsTable extends Migration
             $table->string('birth_month');
             $table->string('day');
             $table->string('gender');
+            $table->string('contestant_img');
             $table->string('facebook')->default(0);
             $table->string('instagram')->default(0);
             $table->string('twitter')->default(0);
