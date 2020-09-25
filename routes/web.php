@@ -23,17 +23,27 @@ Auth::routes();
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
-    Route::get('/profile', 'UserProfileController@index')->name('profile.index');
+    
    //update profile
+    Route::get('/profile', 'UserProfileController@index')->name('profile.index');
     Route::patch('/profile/{user}/update', 'UserProfileController@update')->name('profile.update');
-    //Route::patch('profile/{user}/update', 'UserProfileController@update')->name('dashboard.profile-update');
+
 
       //Campaigns
     Route::get('/campaign', 'CampaignController@index')->name('campaign');
     Route::get('/campaign/create', 'CampaignController@create')->name('campaign.create');
     Route::post('/campaign', 'CampaignController@store')->name('campaign.store');
+    Route::get('/campaign/{id}', 'CampaignController@show')->name('campaign.show');
+
+    //Contests
+    Route::get('/campaign/{campaign}/contest/create', 'ContestController@create')->name('contest.create');
+    Route::post('/campaign/{campaign}/contest', 'ContestController@store')->name('contest.store');
     // Route::get('/subscription/{id}', 'SubscriptionController@show_sub')->name('dashboard.subscription.show');
     //Transaction
     Route::get('/transaction', 'TransactionController@index')->name('dashboard.transaction');
     Route::delete('/transaction/{id}', 'TransactionController@destroy')->name('dashboard.transaction.delete');
 });
+
+    //Feedback
+    route::get('/feedback/create', 'FeedbackController@create')->name('feedback.create');
+    route::post('/feedback', 'FeedbackController@store')->name('feedback.store');

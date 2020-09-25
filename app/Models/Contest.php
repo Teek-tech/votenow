@@ -1,10 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contest extends Model
 {
-    //
+    
+    protected function campaign(){
+        return $this->belongsTo(Campaign::class);
+     }
 }

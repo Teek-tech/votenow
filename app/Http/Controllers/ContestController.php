@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Contest;
+use App\Models\Contest;
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 
 class ContestController extends Controller
@@ -14,7 +15,7 @@ class ContestController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -22,9 +23,9 @@ class ContestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Campaign $campaign)
+    {   //dd($campaign);
+        return view('dashboard.contest.create',compact('campaign'));
     }
 
     /**
@@ -33,15 +34,25 @@ class ContestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($campaign)
     {
-        //
+      
+        $contest = new Contest;
+        $contest->campaign_id = $campaign;
+        $contest->stage = request('stage');
+        $contest->title = request('title');
+        $contest->description = request('description');
+        $contest->regulations = request('regulations');;
+        $contest->save();
+
+        return 'Contest added';
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function show(Contest $contest)
@@ -52,7 +63,7 @@ class ContestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function edit(Contest $contest)
@@ -64,7 +75,7 @@ class ContestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Contest $contest)
@@ -75,7 +86,7 @@ class ContestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Contest  $contest
+     * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contest $contest)

@@ -24,7 +24,7 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        //
+        return view('feedback');
     }
 
     /**
@@ -35,7 +35,19 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'full_name' =>'required',
+            'email' =>'required|email',
+            'report' =>'required',
+        ]);
+
+        $feedback =  new Feedback;
+        $feedback->full_name = request('full_name');
+        $feedback->email = request('email');
+        $feedback->report = request('report');
+
+        $feedback->save();
+        return ('thank you for the feedback');
     }
 
     /**
