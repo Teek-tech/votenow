@@ -112,7 +112,7 @@ class UserProfileController extends Controller
             'image' => $user->image,
             'terms' => 1
         ]);
-       return back()->with('status', 'Profile Updated!');
+       return back()->with('status', 'You have successfully updated your profile!');
     }
    
     /**
