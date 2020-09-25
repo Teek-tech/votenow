@@ -39,13 +39,13 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         
-        $this->validate($request, [
+        $request->validate([
             'title'=>'required',
             'description'=>'required',
-            'banner' => 'required|image|mimes:jpg,jpeg,png',
+            'banner' => 'required|image|mimes:jpg,jpeg,png|max:4000',
         ]);
        
-        $campaign = new Campaign;
+         $campaign = new Campaign;
         $campaign->user_id = auth()->user()->id;
         $campaign->title = request('title');
         $campaign->description = request('description');
@@ -53,11 +53,19 @@ class CampaignController extends Controller
         if ($request->hasFile('banner')) {
             $ban_img = $request->file('banner');
             $filename = '_banner'.time().'.'.$ban_img->getClientOriginalExtension();
-            Image::make($ban_img)->resize(300, 300)->save(public_path('/banner_image/'.$filename));
+            Image::make($ban_img)->resize(300, 300)->save(public_path('/campaign_image/'.$filename));
             $campaign->banner = $filename;
         }
 
         $campaign->save();
+
+        // $campaign->save([ 
+        //     'user_id' => auth()->user()->id,
+        //     'title' =>  $request->input('title'),
+        //     'description' =>  $request->input('description'),
+        //     'banner' =>  $campaign->banner,
+        // ]);
+
         return ('campaign created');
          //dd('testing');
     }

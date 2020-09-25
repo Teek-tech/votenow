@@ -76,50 +76,45 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        
-        // $user->update([
-        //     'first_name' => $request->input('first_name'),
-        //     'last_name' => $request->input('last_name'),
-        //     'email' => $request->input('email'),
-        //     'phone' => $request->input('phone1'),
-        //     'phone' => $request->input('phone2'),
-        //     'country' => $request->input('country'),
-        //     'city' => $request->input('city'),
-        //     'bank_account_name' => $request->input('bank_account_name'),
-        //     'bank_account_number' => $request->input('bank_account_number'),
-        //     'bank_name' => $request->input('bank_name'),
-
-        //     if ($request->hasFile('image')) {
-        //         $oldimg1 = 'profile_image/'.$updateProduct->image;
-        //         if (File::exists($oldimg1)) {
-        //             File::delete($oldimg1);
-        //         }
-        //         $imageOne = $request->file('image');
-        //         $filename1 = '_image'.time().'.'.$imageOne->getClientOriginalExtension();
-        //         Image::make($imageOne)->resize(300, 300)->save(public_path('/profile_image/'.$filename1));
-        //         $updateProduct->image = $filename1;
-        //     }
-
-           
-        // ]);
-
-         $user = auth()->user();
-         $user->first_name = request('first_name');
-         $user->last_name = request('last_name');
-         $user->email = request('email');
-         $user->phone1= request('phone1');
-         $user->phone2= request('phone2');
-         $user->country = request('country');
-         $user->city = request('city');
-         $user->bank_account_name = request('bank_account_name');
-         $user->bank_account_number = request('bank_account_number');
-         $user->bank_name = request('bank_name');
-
-         $user->save();
-         //dd($user);
-            return('profile updated');
+        $request->validate([
+            'first_name' => 'required|min:3|max:15',
+            'last_name' => 'required|min:3|max:15',
+            'email' => 'required|email|max:30',
+            'phone1' => 'required|min:11|max:11',
+            'phone2' => 'required|min:11|max:11',
+            'country' => 'required',
+            'city' => 'required|max:10',
+            'bank_account_name' => 'required|min:3|max:50',
+            'bank_name' => 'required|min:3|max:30',
+            'image' => 'mimes:png,jpeg,jpg|max:4000',
+        ]);
+        if ($request->hasFile('image')) {
+                    $oldimg = 'profile_image/'.$user->image;
+                    if (File::exists($oldimg)) {
+                        File::delete($oldimg);
+                    }
+                    $imageOne = $request->file('image');
+                    $filename = '_image'.time().'.'.$imageOne->getClientOriginalExtension();
+                    Image::make($imageOne)->resize(300, 300)->save(public_path('/profile_image/'.$filename));
+                    $user->image = $filename;
+                }
+        $user->update([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'phone1' => $request->input('phone1'),
+            'phone2' => $request->input('phone2'),
+            'country' => $request->input('country'),
+            'city' => $request->input('city'),
+            'bank_account_name' => $request->input('bank_account_name'),
+            'bank_account_number' => $request->input('bank_account_number'),
+            'bank_name' => $request->input('bank_name'),
+            'image' => $user->image,
+            'terms' => 1
+        ]);
+       return back()->with('status', 'You have successfully updated your profile!');
     }
-
+   
     /**
      * Remove the specified resource from storage.
      *
