@@ -27,12 +27,12 @@ Route::group(['prefix'=>'dashboard-admin', 'middleware'=>['isAdmin', 'auth']], f
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     //view and Update User Information
     Route::get('/user', 'AdminController@viewUsers')->name('admin.users');
-    //Route::get('/user/{user}/edit', 'AdminController@editUser')->name('admin.editUsers');
+    Route::get('/user/{user}/edit', 'AdminController@editUser')->name('admin.editUsers');
+    Route::patch('/user/{user}/update', 'AdminController@updateUser')->name('admin.updatetUsers');
+  
+   
 });
 
-    Route::get('/dashbaord-admin/user/{id}/edit"', function ($id) {
-        dd('testing');
-    });
 //User
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');

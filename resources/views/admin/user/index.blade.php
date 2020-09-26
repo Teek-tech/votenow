@@ -35,8 +35,8 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->isAdmin}}</td>
                             <td>{{$user->status}}</td>
-                            <td><a class="btn btn-danger" href="/dashbaord-admin/user/{{$user->id}}/edit">Edit User</a></td>
-                            
+                            <td><a class="btn btn-danger" href="/dashboard-admin/user/{{$user->id}}/edit">Edit User</a></td>
+                           
                             </tr>
                             @endforeach
                      

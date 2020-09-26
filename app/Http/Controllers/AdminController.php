@@ -21,12 +21,26 @@ class AdminController extends Controller
         $users = User::all();
         return view('admin.user.index')->with('users', $users);
     }
-   
+
     public function editUser($userId){
-        dd('test');
+        
         $user = User::findorfail($userId);
-        dd($user);
+        
+        return view('admin.user.edit')->with('user', $user);
     }
+
+    public function updateUser($userId){
+        
+        $user = User::findorfail($userId);
+        $user->status = request('status');
+        $user->isAdmin = request('isAdmin');
+         //dd($user);
+        $user->save();
+       
+        return redirect('/dashboard-admin/user');
+
+    }
+   
    
 
     /**
