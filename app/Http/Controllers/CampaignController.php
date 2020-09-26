@@ -66,7 +66,8 @@ class CampaignController extends Controller
         //     'banner' =>  $campaign->banner,
         // ]);
 
-        return ('campaign created');
+        return back()->with('status', 'Campaign created successfully');
+        //return ('campaign created');
          //dd('testing');
     }
 

@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 /public/profile_image
 /public/campaign_image
+/public/contestant_image

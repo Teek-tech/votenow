@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,18 @@ Auth::routes();
 
 //Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+//Admin
+Route::group(['prefix'=>'dashboard-admin', 'middleware'=>['isAdmin', 'auth']], function(){
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+    //view and Update User Information
+    Route::get('/user', 'AdminController@viewUsers')->name('admin.users');
+    //Route::get('/user/{user}/edit', 'AdminController@editUser')->name('admin.editUsers');
+});
+
+    Route::get('/dashbaord-admin/user/{id}/edit"', function ($id) {
+        dd('testing');
+    });
+//User
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     
@@ -41,6 +54,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::post('/campaign/{campaign}/contest', 'ContestController@store')->name('contest.store');
 
     //Contestants
+    Route::get('/contest/contestant','ContestantController@index')->name('contestants');
     Route::get('/contest/{contest}/contestant/create', 'ContestantController@create')->name('contestant.create');
     Route::post('/contest/{contest}/contestant', 'ContestantController@store')->name('contestant.store');
 
@@ -54,6 +68,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/subscription', 'SubscriptionController@create')->name('subscription.create');
     Route::post('/subscription', 'SubscriptionController@store')->name('subscription.store');
 });
+
+    //Admin
+    Route::group(['prefix'=>'dashboard-admin', 'middleware'=>['isAdmin', 'auth']], function(){
+        
+    });
 
     //Feedback
     route::get('/feedback/create', 'FeedbackController@create')->name('feedback.create');

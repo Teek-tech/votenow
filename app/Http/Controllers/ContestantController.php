@@ -16,7 +16,8 @@ class ContestantController extends Controller
      */
     public function index()
     {
-        //
+        $contestants = Contestant::all();
+        return view('dashboard.contestant.index')->with('contestants', $contestants);
     }
 
     /**
@@ -38,7 +39,21 @@ class ContestantController extends Controller
      */
     public function store(Contest $contest ,Request $request)
     {
-       
+       $request->validate([
+           'contestant_id'=>'required|',
+           'first_name'=>'required|max:20',
+           'last_name'=>'required|max:20',
+           'other_name'=>'required|max:20',
+           'country'=>'required|max:20',
+           'city'=>'required|max:20',
+           'phone'=>'required|max:20',
+           'email'=>'required|max:50',
+           'birth_month'=>'required|max:20',
+           'day'=>'required|max:20',
+           'gender'=>'required|max:7',
+           'contestant_img' => 'required|image|mimes:jpg,jpeg,png|max:4000',
+       ]);
+
         $contestant =  new Contestant;
         $contestant->contest_id = $contest->id;
         $contestant->contestant_id = request('contestant_id');
@@ -60,9 +75,9 @@ class ContestantController extends Controller
             $contestant->contestant_img = $filename;
         }
 
-
-        dd($contestant);
-
+        $contestant->save();
+        //dd($contestant);
+        return 'contestant added';
     }
 
     /**

@@ -35,11 +35,18 @@ class ContestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($campaign)
+    public function store(Campaign $campaign, Request $request)
     {
-      
+     
+        $request->validate([
+            'stage'=>'required|',
+            'title'=>'required|max:50',
+            'description'=>'required| max: 200',
+            'regulations'=>'required| max:200',
+        ]);
+
         $contest = new Contest;
-        $contest->campaign_id = $campaign;
+        $contest->campaign_id = $campaign->id;
         $contest->stage = request('stage');
         $contest->title = request('title');
         $contest->description = request('description');
@@ -47,6 +54,7 @@ class ContestController extends Controller
         $contest->save();
 
         return 'Contest added';
+        //return view('dashboard.contest.index')->with('status', 'New contest added');
 
     }
 

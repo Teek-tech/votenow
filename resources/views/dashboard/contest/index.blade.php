@@ -11,11 +11,13 @@
                 </div>
 
                 <div class="card-body">
+                  
                    
                     @forelse($contests as $contest)
                         <h2><span style="color: red">Title: </span> {{$contest->title}}</h2>
                         <h4><span style="color: red"> Contest description: </span> {{$contest->description}}</h4>
                             <a class="btn btn-dark" href="/dashboard/contest/{{$contest->id}}/contestant/create">Add Contestant</a>
+                            <a class="btn btn-dark" href="/dashboard/contest/contestant/">View Contestants</a>
                         <hr>
                     @empty
                         <h3>No contests created</h3>

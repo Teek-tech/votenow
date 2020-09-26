@@ -7,13 +7,14 @@
             <div class="card">
                 <div class="card-header">
                     <h2> campaigns</h2>
-                    <h5><a href="{{route('campaign.create')}}">Create campaigns</a></h5>
+                    <h5><a href="{{route('campaign.create')}}">Create Campaign</a></h5>
                 </div>
 
                 <div class="card-body">
                         @forelse($campaigns as $campaign)
                             <h5>{{$campaign->title}}</h5>
-                            <a href="{{route('campaign.show',$campaign->id)}}">View campaign</a>
+                            <a class="btn btn-warning" href="{{route('campaign.show',$campaign->id)}}">View campaign</a>
+                            <hr>
                         @empty
                             <h3>No Campaigns created</h3>
                         @endforelse
