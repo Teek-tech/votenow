@@ -17,30 +17,34 @@
                             
                             <tr>
                             <td>Id</td>
-                            <td>First Name</td>
-                            <td>Last Name</td>
-                            <td>Email</td>
+                            <td>User ID</td>
+                            <td> Timeline</td>
+                            <td> Amount</td>
+                            <td> Payment Ref</td>
+                            <td> Payment Stack</td>
+                            <td>status</td>
                             <td>status</td> 
-                            <td>Admin</td>
+                      
                             </tr>
-                            @foreach($users as $user)
+                            @foreach($subscriptions as $subscription)
                             <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->first_name}}</td>
-                            <td>{{$user->last_name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->status}}</td>
+                            <td>{{$subscription->id}}</td>
+                            <td>{{$subscription->user_id}}</td>
+                            <td>{{$subscription->timeline}}</td>
+                            <td>{{$subscription->amount}}</td>
+                            <td>{{$subscription->payment_ref}}</td>
+                            <td>{{$subscription->paystack_ref}}</td>
+                            <td>{{$subscription->status}}</td>
                             {{-- <input data-id="{{$user->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" 
                         data-toggle="toggle" data-on="Active"  data-off="InActive" {{ $user->status ? 'checked' : '' }}></td> --}}
-                            <td>{{$user->isAdmin}}</td>
                             <td>
-                                <a class="btn btn-danger" href="/dashboard-admin/user/{{$user->id}}/edit">Edit User</a>
+                                <a class="btn btn-warning" href="/dashboard-admin/subscription/{{$subscription->id}}/edit" >Edit Subscription</a>
                                 
                             </td>
                            
                             </tr>
                             @endforeach
-                     
+                                <h5>No User subscription</h5>
                          </table>
                      </div>
                     </div>
@@ -50,22 +54,3 @@
     </div>
 </div>
 @endsection
-{{-- <script>
-    $(function() {
-        $('.toggle-class').change(function() {
-            var status = $(this).prop('checked') == true ? 1 : 0; 
-            var user_id = $(this).data('id'); 
-             
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: '/dashboard-admin/user/{user}/updateAdmin',
-                data: {'status': status, 'user_id': user_id},
-                success: function(data){
-                  console.log(data.success)
-                }
-            });
-        })
-      })
-    </script>
-     --}}

@@ -19,8 +19,11 @@
                     <div>
                         
                         <h4><a href="{{route('admin.users')}}">View Users</a></h4>
-                        <h4><a href="{{route('campaign')}}">View Campaigns</a></h4>
-                        <h4><a href="{{route('subscription.create')}}">View subscriptions</a></h4>
+                        <h4><a href="{{route('admin.viewCampaigns')}}">View Campaigns</a></h4>
+                        <h4><a href="{{route('admin.viewSubcriptions')}}">View subscriptions</a></h4>
+                        <h4><a href="{{route('admin.viewTransactions')}}">View Transactions</a></h4>
+                        <h4><a href="{{route('admin.viewContests')}}">View Contests</a></h4>
+                        <h4><a href="{{route('admin.viewContestants')}}">View Contestants</a></h4>
 
                         
                     </div>

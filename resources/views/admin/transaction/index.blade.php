@@ -17,30 +17,35 @@
                             
                             <tr>
                             <td>Id</td>
-                            <td>First Name</td>
-                            <td>Last Name</td>
-                            <td>Email</td>
+                            <td>Contest ID</td>
+                            <td>Contestant ID</td>
+                            <td>Email</td> 
+                            <td>Number of Votes</td>
+                            <td>Amount</td>
+                            <td>Payment Ref</td>
                             <td>status</td> 
-                            <td>Admin</td>
+                      
                             </tr>
-                            @foreach($users as $user)
+                            @foreach($transactions as $transaction)
                             <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->first_name}}</td>
-                            <td>{{$user->last_name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->status}}</td>
+                            <td>{{$transaction->id}}</td>
+                            <td>{{$transaction->contest_id}}</td>
+                            <td>{{$transaction->contestant_id}}</td>
+                            <td>{{$transaction->email}}</td>
+                            <td>{{$transaction->number_of_votes}}</td>
+                            <td>{{$transaction->amount}}</td>
+                            <td>{{$transaction->payment_ref}}</td>
+                            <td>{{$transaction->status}}</td>
                             {{-- <input data-id="{{$user->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" 
                         data-toggle="toggle" data-on="Active"  data-off="InActive" {{ $user->status ? 'checked' : '' }}></td> --}}
-                            <td>{{$user->isAdmin}}</td>
                             <td>
-                                <a class="btn btn-danger" href="/dashboard-admin/user/{{$user->id}}/edit">Edit User</a>
+                                <a class="btn btn-warning" href="/dashboard-admin/transaction/{{$transaction->id}}/edit" >Edit Transaction</a>
                                 
                             </td>
                            
                             </tr>
                             @endforeach
-                     
+                                <h5 class="alert alert-warning">No Transactions</h5>
                          </table>
                      </div>
                     </div>
@@ -50,22 +55,3 @@
     </div>
 </div>
 @endsection
-{{-- <script>
-    $(function() {
-        $('.toggle-class').change(function() {
-            var status = $(this).prop('checked') == true ? 1 : 0; 
-            var user_id = $(this).data('id'); 
-             
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: '/dashboard-admin/user/{user}/updateAdmin',
-                data: {'status': status, 'user_id': user_id},
-                success: function(data){
-                  console.log(data.success)
-                }
-            });
-        })
-      })
-    </script>
-     --}}

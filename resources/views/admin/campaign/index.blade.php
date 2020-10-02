@@ -17,24 +17,23 @@
                             
                             <tr>
                             <td>Id</td>
-                            <td>First Name</td>
-                            <td>Last Name</td>
-                            <td>Email</td>
+                            <td>User ID</td>
+                            <td>Campaign Title</td>
+                            <td>Campaign Description</td>
                             <td>status</td> 
-                            <td>Admin</td>
+                      
                             </tr>
-                            @foreach($users as $user)
+                            @foreach($campaigns as $campaign)
                             <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->first_name}}</td>
-                            <td>{{$user->last_name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->status}}</td>
+                            <td>{{$campaign->id}}</td>
+                            <td>{{$campaign->user_id}}</td>
+                            <td>{{$campaign->title}}</td>
+                            <td>{{$campaign->description}}</td>
+                            <td>{{$campaign->status}}</td>
                             {{-- <input data-id="{{$user->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" 
                         data-toggle="toggle" data-on="Active"  data-off="InActive" {{ $user->status ? 'checked' : '' }}></td> --}}
-                            <td>{{$user->isAdmin}}</td>
                             <td>
-                                <a class="btn btn-danger" href="/dashboard-admin/user/{{$user->id}}/edit">Edit User</a>
+                                <a class="btn btn-warning" href="/dashboard-admin/campaign/{{$campaign->id}}/edit" >Edit Campaign</a>
                                 
                             </td>
                            
@@ -50,22 +49,3 @@
     </div>
 </div>
 @endsection
-{{-- <script>
-    $(function() {
-        $('.toggle-class').change(function() {
-            var status = $(this).prop('checked') == true ? 1 : 0; 
-            var user_id = $(this).data('id'); 
-             
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: '/dashboard-admin/user/{user}/updateAdmin',
-                data: {'status': status, 'user_id': user_id},
-                success: function(data){
-                  console.log(data.success)
-                }
-            });
-        })
-      })
-    </script>
-     --}}
